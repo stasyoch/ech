@@ -1,3 +1,4 @@
+gcc -g -m32 -c call_c_asm.s
 .data
 .LC0:
         .string "%d"
