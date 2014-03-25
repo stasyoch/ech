@@ -1,33 +1,36 @@
  .data
-.LC0:
+int_1:
+        .space 4
+fmt_string:
         .string "%d"
-.LC1:
-        .string "0"
-.LC2:
-        .string "1"
+ok:
+        .string "ok\n"
+nok:
+        .string "try again\n"
+
         .text
-.globl main
-        .type   main, @function
+        .globl main
 main:
-        pushl   %ebp
-        movl    %esp, %ebp
-        andl    $-16, %esp
-        subl    $32, %esp
-        movl    $.LC0, %eax
-        leal    28(%esp), %edx
-        movl    %edx, 4(%esp)
-        movl    %eax, (%esp)
-        call    __isoc99_scanf
-        movl    28(%esp), %eax
-        cmpl    $11, %eax
-        jne     .L2
-        movl    $.LC1, (%esp)
-        call    puts
-        jmp     .L3
-.L2:
-        movl    $.LC2, (%esp)
-        call    puts
-.L3:
-        movl    $0, %eax
-        leave
+        pushl %ebp
+        movl %esp, %ebp
+        pushl $int_1
+        pushl $fmt_string
+        call scanf
+        addl $8, %esp
+        movl int_1, %eax
+        cmp $12,%eax
+        je lbl
+        pushl $nok
+        call printf
+        addl $4, %esp
+        jmp end
+lbl:
+        pushl $ok
+        call printf
+        addl $4, %esp
+end:
+        movl %ebp, %esp
+        popl %ebp
+        movl $0, %eax
         ret
+
