@@ -1,96 +1,52 @@
 .data
-.LC0:
+fmt_string:
         .string "%d"
+int_1:
+        .space 4
+fmt_print:
+        .string "\n"
 
 .text
 .globl main
-        .type   main, @function
 main:
-        pushl   %ebp
-        movl    %esp, %ebp
-        andl    $-16, %esp
-        subl    $48, %esp
-        movl    $1p)
-        jmp     .L2
-.L3:
-        movl    32(%esp), %eax
-        movl    %eax, %edx
-        sarl    $31, %edx
-        shrl    $31, %edx
-        addl    %edx, %eax
-        andl    $1, %eax
-        subl    %edx, %eax
-        movl    %eax, 36(%esp)
-        movl    36(%esp), %eax
-        imull   40(%esp), %eax
-        addl    %eax, 44(%esp)
-
-
-        movl    40(%esp), %edx
-        movl    %edx, %eax
-        sall    $2, %eax
-        addl    %edx, %eax
-        addl    %eax, %eax
-        movl    %eax, 40(%esp)
-        movl    32(%esp), %eax
-        movl    %eax, %edx
-        shrl    $31, %edx
-        leal    (%edx,%eax), %eax
-        sarl    %eax
-        movl    %eax, 32(%esp)
-.L2:
-        cmpl    $0, 32(%esp)
-        jg      .L3
-        movl    $.LC0, %eax
-        movl    44(%esp), %edx
-        movl    %edx, 4(%esp)
-        movl    %eax, (%esp)
-        call    printf
-        movl    $0, %eax
-        leave
+        pushl %ebp
+        movl %esp, %ebp
+        pushl $int_1
+        pushl $fmt_string
+        call scanf
+        addl $8, %esp
+        movl int_1, %eax
+        movl $32, %ecx
+        movl $0, %edx
+shear:
+        shll $1, %eax
+        movl $0, %ebx
+        jnb print
+        incl %ebx
+        movl $1, %edx
+print:
+        cmpl $1, %edx
+        jne loop
+        pushl %ecx
+        pushl %eax
+        pushl %edx
+        pushl %ebx
+        pushl $fmt_string
+        call printf
+        addl $8, %esp
+        popl %edx
+        popl %eax
+        popl %ecx
+loop:
+        loop shear
+        pushl $fmt_print
+        call printf
+        addl $4, %esp
+        movl $0, %eax
+        movl %ebp, %esp
+        popl %ebp
         ret
-esp)
-        movl    $0, 44(%esp)
-        movl    $.LC0, %eax
-        leal    28(%esp), %edx
-        movl    %edx, 4(%esp)
-        movl    %eax, (%esp)
-        call    __isoc99_scanf
-        movl    28(%esp), %eax
-        movl    %eax, 32(%esp)
-        jmp     .L2
-.L3:
-        movl    32(%esp), %eax
-        movl    %eax, %edx
-        sarl    $31, %edx
-        shrl    $31, %edx
-        addl    %edx, %eax
-        andl    $1, %eax
-        subl    %edx, %eax
-        movl    %eax, 36(%esp)
-        movl    36(%esp), %eax
-        imull   40(%esp), %eax
-        addl    %eax, 44(%esp)
-        movl    40(%esp), %edx
-        movl    %edx, %eax
-        sall    $2, %eax
-        addl    %edx, %eax
-        addl    %eax, %eax
-        movl    %eax, 40(%esp)
-        movl    32(%esp), %eax
-        movl    %eax, %edx
-        shrl    $31, %edx
-        leal    (%edx,%eax), %eax
-        sarl    %eax
-        movl    %eax, 32(%esp)
-.L2:
-        cmpl    $0, 32(%esp)
-        jg      .L3
-        movl    $.LC0, %eax
-        movl    44(%esp), %edx
-        movl    %edx, 4(%esp)
-        movl    %eax, (%esp)
-        call    printf
-        movl    $0, %eax
-        leave
-        ret
+
+       
+       
+        
