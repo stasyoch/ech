@@ -1,3 +1,4 @@
+/* 7 is the end of line  */
 .data
 fmt:
         .string "%c"
