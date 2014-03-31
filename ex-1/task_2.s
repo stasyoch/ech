@@ -1,8 +1,8 @@
 .data
 fmt_print:
-        .string "%d\n"
+        .string "%u\n"
 fmt_string:
-        .string "%d %d"
+        .string "%u %u"
 int_1:
         .space 4
 int_2:
