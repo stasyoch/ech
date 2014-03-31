@@ -1,4 +1,3 @@
-/* 7 is the end of line  */
 .data
 fmt:
         .string "%c"
@@ -8,6 +7,8 @@ int_1:
         .space 1
 int_2:
         .space 4
+eof:
+        .string "7"
 
 .text
 .globl main
@@ -21,7 +22,7 @@ ll1:
         call scanf
         movb int_1,%bl
         incl %ecx
-        cmpb $55,%bl
+        cmpb eof,%bl
         jne ll1
         je out
 out:
