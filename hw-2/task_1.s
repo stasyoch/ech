@@ -55,6 +55,7 @@ main:
         pushl $fmt_1
         call printf
 
+        movl $0,%eax
         movl %ebp,%esp
         popl %ebp
         ret
