@@ -1,4 +1,4 @@
-data
+.data
 fmt_scan:
         .string "%lf%lf%lf"
 fmt_print:
